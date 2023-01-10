@@ -2,8 +2,8 @@ import player from '@vimeo/player';
 import  throttle  from 'lodash.throttle';
 
 // const iframe = document.querySelector('iframe');
-// // const iframePlayer = new Vimeo.Player(iframe);
 // const CURRENT_TIME = 'videoplayer-current-time';
+// // const iframePlayer = new Vimeo.Player(iframe);
 // const player = new Vimeo.Player(iframe);
 
 // player.on('timeupdate', function (currentTime) {
@@ -31,7 +31,6 @@ import  throttle  from 'lodash.throttle';
 //             break;
 //     }
 // });
-
 
 // getCurrentTime()
 
