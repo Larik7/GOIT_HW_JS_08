@@ -1,5 +1,31 @@
 import player from '@vimeo/player';
-import  throttle  from 'lodash.throttle';
+import  throttle from 'lodash.throttle';
+
+// first version
+
+// const iframe = document.querySelector('iframe');
+// const CURRENT_TIME = 'videoplayer-current-time';
+// const player = new Vimeo.Player(iframe);
+
+// player.on('timeupdate', throttle(onPlay, 1000));
+
+// function onPlay({ seconds }) {
+// localStorage.setItem(CURRENT_TIME, seconds);
+// }
+
+// setCurrentTime()
+// function setCurrentTime(){
+// const savedTime = localStorage.getItem(CURRENT_TIME);
+// if(!savedTime){
+// return
+// }
+// player.setCurrentTime(savedTime)
+// }
+
+
+
+
+
 
 // const iframe = document.querySelector('iframe');
 // const CURRENT_TIME = 'videoplayer-current-time';
@@ -41,4 +67,4 @@ import  throttle  from 'lodash.throttle';
 // });
 
 
-console.log(Player);
+// console.log(Player);
