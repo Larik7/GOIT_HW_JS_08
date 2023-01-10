@@ -24,20 +24,5 @@ function createImagesGallery(galleryItems) {
         }).join("");
 }
 
-imagesBox.addEventListener('click', (evt) => {
-    evt.preventDefault();
-
-    if (evt.target.nodeName !== 'IMG') {
-        return;
-    }
-
-    const bigImage = evt.target.getAttribute('data-source');
-    const instance = basicLightbox.create(`
-    <img src="${bigImage}" width="800" height="600">
-`)
-
-    instance.show();
-});
-
-
+let lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionPosition:'bottom', captionDelay: 250 });
 console.log(SimpleLightbox);
