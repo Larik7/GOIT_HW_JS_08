@@ -3,25 +3,34 @@ import throttle from "lodash.throttle";
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 const form = document.querySelector('form');
 
-const save = (LOCALSTORAGE_KEY, value) => {
-  try {
-    const serializedState = JSON.stringify(value);
-    localStorage.setItem(LOCALSTORAGE_KEY, serializedState);
-  } catch (error) {
-    console.error("Set state error: ", error.message);
-  }
+getSavedForm();
+
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    const formText = new FormData(form);
+    formText.forEach((name, value) => console.log(name, value));
+    form.reset();
+    localStorage.removeItem(LOCALSTORAGE_KEY);
+});
+
+form.addEventListener('input', event => {
+    let savedForm = localStorage.getItem(LOCALSTORAGE_KEY); 
+    savedForm = savedForm ? JSON.parse(savedForm) : {};
+    savedForm[event.target.name] = event.target.value;
+    updateFormPerTime(savedForm);
+});
+
+function getSavedForm() { 
+    let savedForm = localStorage.getItem(LOCALSTORAGE_KEY);
+    if (savedForm) {
+        savedForm = JSON.parse(savedForm);
+        Object.entries(savedForm).forEach(([name, value]) => {
+            form.elements[name].value = value;
+        })
+    }
 };
 
-const load = LOCALSTORAGE_KEY => {
-  try {
-    const serializedState = localStorage.getItem(LOCALSTORAGE_KEY);
-    return serializedState === null ? undefined : JSON.parse(serializedState);
-  } catch (error) {
-    console.error("Get state error: ", error.message);
-  }
-};
 
-export default {
-  save,
-  load,
-};
+const updateFormPerTime = throttle((updatedData) => {
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(updatedData));
+}, 500, { trailing: false });
